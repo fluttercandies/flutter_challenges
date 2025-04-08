@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 
@@ -113,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             height: offset,
                             alignment: Alignment.center,
                             child: const CupertinoActivityIndicator(
-                                activeColor: Colors.blue),
+                                color: Colors.blue),
                           ),
                         );
                       },

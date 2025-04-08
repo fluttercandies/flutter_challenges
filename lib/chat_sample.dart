@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:english_words/english_words.dart';
 import 'package:extended_list/extended_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 
@@ -60,7 +61,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<ChatItem> chats = <ChatItem>[];
   List<ChatItem> newChats = <ChatItem>[];
-  GlobalKey key = GlobalKey();
+  final Key _centerKey = const ValueKey<String>('center-sliver');
   late ScrollController _scrollController;
   int newMeassageCount = 0;
   StreamController<int> streamController = StreamController<int>.broadcast();
@@ -149,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     /// in case list is not full screen and remove ios Bouncing
                     physics: const AlwaysScrollableClampingScrollPhysics(),
                     controller: _scrollController,
-                    center: key,
+                    center: _centerKey,
                     slivers: <Widget>[
                       PullToRefreshContainer(
                         (PullToRefreshScrollNotificationInfo? info) {
@@ -160,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: offset,
                               alignment: Alignment.center,
                               child: const CupertinoActivityIndicator(
-                                  activeColor: Colors.blue),
+                                  color: Colors.blue),
                             ),
                           );
                         },
@@ -178,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       ExtendedSliverList(
-                        key: key,
+                        key: _centerKey,
                         delegate: SliverChildBuilderDelegate(
                           (BuildContext context, int index) {
                             final ChatItem item = chats[index];
